@@ -258,14 +258,14 @@ export const emptyUserCart = async(req, res) => {
     } else {
   try {
     const user = await User.findOne({ _id });
-    const cart = await Cart.findByIdAndDelete({ orderby: _id });
-    res.status(200).json({success: false, message: 'User Cart removed', data: cart});
+    const cart = await Cart.findOneAndDelete({ orderby: _id });
+    res.status(200).json({success: true, message: 'User Cart removed', data: cart});
   } catch (error) {
     console.log(error);
     res.status(500).json({success: false});
   }
 }
-};// need to check
+};//checked
 
 export const createOrder = async(req, res) => {
   const { _id } = req.user;
